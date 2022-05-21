@@ -1,5 +1,7 @@
 // SPDX-License-Identifier: Unlicence
-pragma solidity >=0.4.22 <0.9.0;
+pragma solidity ^0.8.4;
+
+import "./kxshareToken.sol";
 
 contract predictMarket {
   struct predict {
@@ -12,7 +14,7 @@ contract predictMarket {
   mapping(address => uint) public unclaimed;
   uint public predictCount;
   uint public provisionalNum;
-  
+
   constructor(){
     predictCount = 0;
     provisionalNum = 100;
@@ -32,10 +34,13 @@ contract predictMarket {
     return result;
   }
 
-  function buyPredict(uint _id) public payable {
-    require(msg.value == predicts[_id].amount, "insufficient funds");
+  function buyPredict(uint _id, address _tokenAddr) public {
+    uint _amount = predicts[_id].amount;
+    ERC20 token = ERC20(_tokenAddr);
+    require(token.balanceOf(address(this)) >= _amount, "app does not have enough funds");
+    token.transferFrom(msg.sender, address(this), _amount);
     purchasedPredicts[msg.sender].push(_id);
-    unclaimed[msg.sender] += predicts[_id].amount;
+    unclaimed[predicts[_id].predictor] += _amount;
   }
 
   function viewPredict(uint _id) public view returns(predict memory) {
@@ -45,13 +50,15 @@ contract predictMarket {
         viewable = true;
       }
     }
-    require(viewable, "you has't purchase article");
+    require(viewable, "you hasn't purchase article");
     return predicts[_id];
   }
 
-  function claim() public {
+  function claim(address _tokenAddr) public {
+    ERC20 token = ERC20(_tokenAddr);
     uint _amount = unclaimed[msg.sender];
-    require(_amount > 0, "no unclaimed");
     unclaimed[msg.sender] = 0;
+    require(_amount > 0, "no unclaimed");
+    token.transfer(msg.sender, _amount);
   }
 }
