@@ -16,8 +16,7 @@ var abi = {
         }
       ],
       "stateMutability": "view",
-      "type": "function",
-      "constant": true
+      "type": "function"
     },
     {
       "inputs": [
@@ -46,8 +45,7 @@ var abi = {
         }
       ],
       "stateMutability": "view",
-      "type": "function",
-      "constant": true
+      "type": "function"
     },
     {
       "inputs": [],
@@ -60,8 +58,7 @@ var abi = {
         }
       ],
       "stateMutability": "view",
-      "type": "function",
-      "constant": true
+      "type": "function"
     },
     {
       "inputs": [
@@ -85,8 +82,7 @@ var abi = {
         }
       ],
       "stateMutability": "view",
-      "type": "function",
-      "constant": true
+      "type": "function"
     },
     {
       "inputs": [
@@ -105,8 +101,7 @@ var abi = {
         }
       ],
       "stateMutability": "view",
-      "type": "function",
-      "constant": true
+      "type": "function"
     },
     {
       "inputs": [
@@ -151,18 +146,12 @@ var abi = {
           "internalType": "uint256",
           "name": "_id",
           "type": "uint256"
-        },
-        {
-          "internalType": "address",
-          "name": "_tokenAddr",
-          "type": "address"
         }
       ],
       "name": "buyPredict",
       "outputs": [],
       "stateMutability": "payable",
-      "type": "function",
-      "payable": true
+      "type": "function"
     },
     {
       "inputs": [
@@ -192,23 +181,16 @@ var abi = {
               "type": "uint256"
             }
           ],
-          "internalType": "struct predictMarket.predict",
+          "internalType": "struct ethPredictMarket.predict",
           "name": "",
           "type": "tuple"
         }
       ],
       "stateMutability": "view",
-      "type": "function",
-      "constant": true
+      "type": "function"
     },
     {
-      "inputs": [
-        {
-          "internalType": "address",
-          "name": "_tokenAddr",
-          "type": "address"
-        }
-      ],
+      "inputs": [],
       "name": "claim",
       "outputs": [],
       "stateMutability": "nonpayable",
